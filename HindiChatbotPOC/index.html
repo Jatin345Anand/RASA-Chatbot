@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Web Chatbot With Nurse</title>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="./custom.css">
+</head>
+<body> 
+    <img src="./assets/Thinking-New.gif" alt="" class="gif" id="thinking">
+    <div id="speakingLady">
+        <img src="./assets/Thinking-New.gif" alt="" class="gif" id="thinking">
+        <img src="./assets/standUpSpeaking.gif" alt="" class="gif" id="standUpSpeaking">
+        <img src="./assets/Explaining-New.gif" alt="" class="gif" id="narratingOrExplaining">
+        <img src="./assets/Typing-New.gif" alt="" class="gif" id="typing">
+        <img src="./assets/kudosGiving.gif" alt="" class="gif" id="kudosGiving">
+    </div>
+    <!-- <img src="https://play-lh.googleusercontent.com/S9dy41eMVf307Vm1kc4ZpGmstvSLmztQ0UkQoqa665yYWyJ7FwMtlXY0Lj8ThNGbu40" id="mic" alt=""> -->
+    
+    <style>
+        .rw-conversation-container {
+            width: 985px;
+            border-radius: 3%;
+            box-shadow: none;
+        } 
+
+        .rw-launcher{
+            cursor: pointer;
+    	    background-color: transparent;
+            box-shadow: none;
+        } 
+
+        .rw-messages-container {
+            max-height: 485px;
+            height: 485px;
+            background-color: transparent; 
+        }
+
+        /* .rw-group-message  */
+
+        .rw-conversation-container .rw-header  {
+            background-color: transparent;
+        } 
+
+        /* .rw-conversation-container .rw-header.rw-with-subtitle span {
+            left: 20px;
+            color: dodgerblue;
+        } */
+        .rw-conversation-container .rw-title {
+            color: greenyellow;
+        }
+        .rw-from-response {
+            display: none;
+        }
+
+    </style>
+    <script>!(function () {
+
+        let e = document.createElement("script"),
+          t = document.head || document.getElementsByTagName("head")[0];
+          (e.src =
+          "https://cdn.jsdelivr.net/npm/rasa-webchat@1.0.1/lib/index.js"),
+          // Replace 1.x.x with the version that you want
+          (e.async = !0),
+          (e.onload = () => {
+            window.WebChat.default(
+              {
+                selector: "#webchat",
+                // initPayload: "/utter_beds_type",
+                welcomeMessage: "Hi! Welcome to automated doctor appointment.",
+                customData: {"language": "hi-In"}, // arbitrary custom data. Stay minimal as this will be added to the socket
+                socketUrl: "http://localhost:5005",
+                socketPath: "/socket.io/",
+                title: "UTL AI Assistant",
+                // subtitle: "Doctor Appointment | Queries and Questions",
+                params: {"storage": "session"},
+                fullScreenMode: true
+              },
+              null
+            );
+          }),
+          t.insertBefore(e, t.firstChild);
+      })();
+      
+      </script>
+
+</body>
+</html>

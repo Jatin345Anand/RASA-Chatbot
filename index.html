@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+
+	<title>Speech to Text</title>
+</head>
+
+<body>
+	<div class="words" contenteditable>
+		<p id="p"></p>
+	</div>
+
+	<button onclick="stop()">Stop</button>
+	<button onclick="start()">Start</button>
+	<script>
+		var speech;
+		window.SpeechRecognition = window.SpeechRecognition
+						|| window.webkitSpeechRecognition;
+
+		const recognition = new SpeechRecognition();
+		recognition.interimResults = false;
+		recognition.continuous = true;
+		const words = document.querySelector('.words');
+		words.appendChild(p);
+
+		recognition.addEventListener('result', e => {
+			const transcript = Array.from(e.results)
+				.map(result => result[0])
+				.map(result => result.transcript)
+				.join('')
+
+			document.getElementById("p").innerHTML = transcript;
+			console.log(transcript);
+		});
+		function stop(){
+			console.log('Stop A...', speech);
+			speech = false;
+			recognition.stop();
+			// recognition.addEventListener('start', recognition.end);
+			console.log('Stop B...',speech)
+		}
+		function start(){
+			console.log('Start A...',speech)
+			speech = true;
+			// recognition.stop();
+			recognition.start();
+			// recognition.addEventListener('end', recognition.start);
+			console.log('Start B...',speech)
+			
+		}
+		
+		if (speech == true) {
+			// recognition.start();
+			// recognition.addEventListener('end', recognition.start);
+		}
+	</script>
+</body>
+
+</html>

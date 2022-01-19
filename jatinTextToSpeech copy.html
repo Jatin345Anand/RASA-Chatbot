@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+         *,
+        *:before,
+        *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+         input[type="text"] {
+            width: 100%;
+            padding: 0.5em;
+            font-size: 1.2em;
+            border-radius: 3px;
+            border: 1px solid #D9D9D9;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1) inset;
+        }
+        button:hover,
+        button:focus {
+            opacity: 0.75;
+            cursor: pointer;
+        }
+
+        button:active {
+            opacity: 1;
+            box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.1) inset;
+        }
+        .option {
+            margin: 1em 0;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <input type="text" name="speech-msg" id="speech-msg" x-webkit-speech>
+    <div class="option">
+        <label for="voice">Voice</label>
+        <select name="voice" id="voice"></select>
+    </div>
+    
+
+    <button onclick="speak()">Speak</button>
+    <script>
+        // Get the voice select element.
+        var voiceSelect = document.getElementById('voice');
+
+        // Fetch the list of voices and populate the voice options.
+        function loadVoices() {
+            // Fetch the available voices.
+            var voices = speechSynthesis.getVoices();
+            console.log('VOICES', voices);
+            // Loop through each of the voices.
+            voices.forEach(function (voice, i) {
+                // Create a new option element.
+                var option = document.createElement('option');
+
+                // Set the options value and text.
+                option.value = voice.name;
+                option.innerHTML = voice.name;
+
+                // Add the option to the voice selector.
+                voiceSelect.appendChild(option);
+            });
+        }
+
+        // Execute loadVoices.
+        loadVoices();
+
+        // Chrome loads voices asynchronously.
+        window.speechSynthesis.onvoiceschanged = function (e) {
+            loadVoices();
+        };
+
+        function speak(){
+            var speechMsgInput = document.getElementById('speech-msg');
+            if (speechMsgInput.value.length > 0) {
+                        // speak(speechMsgInput.value);
+                        console.log(speechMsgInput.value);
+                var msg = new SpeechSynthesisUtterance(speechMsgInput.value);
+            }
+//             onboundary: null
+// onend: null
+// onerror: null
+// onmark: null
+// onpause: null
+// onresume: null
+// onstart: null
+
+            console.log(msg);
+            if (voiceSelect.value) {
+                   console.log(speechSynthesis.getVoices().filter(function (voice) { return voice.name == voiceSelect.value; })[0]);
+                    msg.voice = speechSynthesis.getVoices().filter(function (voice) { return voice.name == voiceSelect.value; })[0];
+            }
+            msg.lang = 'hi-IN';
+            // msg.volume =1;
+            // msg.pitch = 1;
+            // window.speechSynthesis.resume()
+            msg.onend = function (){
+                console.log('on end');
+            }
+            msg.onerror = function (){
+                console.log('on eror');
+            }
+            msg.onresume = function (){
+                console.log('on resume');
+            }
+            msg.onpause = function (){
+                console.log('on pause');
+            }
+            msg.onmark = function (){
+                console.log('on mark');
+            }
+            msg.onstart = function (){
+                console.log('on start');
+            }
+            console.log('speak');
+            window.speechSynthesis.speak(msg);
+            
+        }
+    </script>
+</body>
+</html>

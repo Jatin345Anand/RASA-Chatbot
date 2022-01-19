@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content=
+		"width=device-width, initial-scale=1.0">
+
+	<title>Speech to Text</title>
+	<script>
+		// var speech = true;
+		window.SpeechRecognition = window.SpeechRecognition
+						|| window.webkitSpeechRecognition;
+
+		const recognition = new SpeechRecognition();
+		// recognition.interimResults = true;
+		let textOutput = document.getElementById('text');
+		let content = '';
+		recognition.continuous = true;
+		// recognition.lang = 'en-US';
+		// recognition.interimResults = false;
+		// recognition.maxAlternatives = 1;
+
+		recognition.onstart = function (){
+			console.log('Recognition is on!');
+		}
+		recognition.onspeechend = function(){
+			console.log('It is end now!');
+		}
+		recognition.onerror = function(){
+			console.log('Try again, because some error.');
+		}
+
+		// recognition.onresult = function(event) {
+		// 	console.log('on result mode')
+		// 	let current = event.resultIndex;
+		// 	let transcript = event.results[current][0].transcript;
+		// 	content += transcript;
+		// 	textOutput.val(content);
+		// }
+		const words = document.querySelector('.words');
+		words.appendChild(p);
+		recognition.onresult = function(event) {
+			console.log('on result mode')
+		// recognition.addEventListener('result', e => {
+			const transcript = Array.from(event.results)
+				.map(result => result[0])
+				.map(result => result.transcript)
+				.join('')
+
+			document.getElementById("p").innerHTML = transcript;
+			console.log(transcript);
+		// });
+
+		}
+	
+
+		
+		
+		function Start(){
+            console.log('Start');
+		//  if (speech == true) {
+			recognition.start();
+			// recognition.addEventListener('end', recognition.start);
+		// }
+		}
+		function Stop(){
+			console.log('Stop');
+			// if (speech == true) {
+			recognition.stop();
+			// recognition.addEventListener('end', recognition.start);
+		// }
+		}
+	</script>
+</head>
+
+<body>
+	<button id="start" onclick="Start()">Start</button> &nbsp; <button id="stop" onclick="Stop()">Stop</button>
+	<div class="words" contenteditable>
+		<p id="p"></p>
+	</div>
+    <!-- <div id="text"></div> -->
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    background-image: url("https://wallpaperaccess.com/full/136920.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* #speakingLady {
+    
+} */
+
+#mic {
+    position: absolute;
+    width: 63px;
+    top: 39px;
+    right: 4px;
+    display: inline-block;
+    opacity: 1;
+    transition: opacity 1s;
+    cursor: pointer;
+}
+
+#mic.hide {
+    opacity: 0;
+}
+
+#thinking {
+    width: 375px;
+    height: auto;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+}
+
+#kudosGiving {
+    width: 375px;
+    height: auto;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+}
+
+#standUpSpeaking {
+    width: 394px;
+    height: auto;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+}
+
+#narratingOrExplaining {
+    width: 375px;
+    height: auto;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+}
+
+#typing {
+    width: 425px;
+    height: auto;
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+}
+
+
